@@ -3,6 +3,11 @@ from peewee_data.db_file import db
 
 
 def create_tables():
-    # Создается таблица user
-    db.connect()
-    db.create_tables([User], safe=True)
+    # Используем контекстный менеджер для подключения
+    with db.connection_context():
+        try:
+            # Создаем таблицу user, если она не существует
+            db.create_tables([User], safe=True)
+            print("Таблицы успешно созданы.")
+        except Exception as e:
+            print(f"Произошла ошибка при создании таблиц: {e}")
