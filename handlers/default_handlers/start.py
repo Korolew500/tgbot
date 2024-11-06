@@ -1,7 +1,6 @@
 from telebot.types import Message
 from loader import bot
-from database.user import User
-from peewee_data.db_file import db
+from peewee_data.create_for_start import db, User
 
 
 
@@ -18,5 +17,5 @@ def bot_start(message: Message):
                               f"Получайте свежие данные о курсах валют, ставках и финансовых новостях без лишних усилий. "
                               f"Мы здесь, чтобы сделать вашу жизнь проще! 💡\nДавайте стартовать! 🚀")
     else:
-        bot.reply_to(message, f"С возвращением, {user.full_name}! 😊\n"
+        bot.reply_to(message, f"С возвращением, {user.name}! 😊\n"
                               f"Мы рады видеть вас снова. Как мы можем помочь вам сегодня?")
