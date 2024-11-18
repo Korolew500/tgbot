@@ -9,7 +9,7 @@ else:
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 
 DEFAULT_COMMANDS = (
-    ("start", "Запустить бота"),
+    ("start", "Перезапустить бота"),
     ("help", "Вывести справку"),
     ("history", "История запросов"),
     ("metals", "Курсы металлов"),
