@@ -7,4 +7,3 @@ if __name__ == "__main__":
    set_default_commands(bot)
    create_tables() # Подключается база данных
    bot.infinity_polling()
-
