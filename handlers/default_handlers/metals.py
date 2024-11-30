@@ -16,6 +16,7 @@ def bot_metals(message: Message):
         db.commit()
     bot.send_message(message.from_user.id, metals_logic(), reply_markup=gen_markup())
     user.metals_count += 1
+    user.save()
     db.commit()
 
 
@@ -27,9 +28,9 @@ def metals_answer(callback_query):
 
 def metals_logic() -> str:
     # Дата в формате 02/03/2002
-    date_req1 = (datetime.date.today() - datetime.timedelta(days=1)).strftime("%d/%m/%Y")
-    date_req2 = datetime.date.today().strftime("%d/%m/%Y")
-    url = f"https://www.cbr.ru/scripts/xml_metall.asp?date_req1={date_req2}&date_req2={date_req2}"
+    # date_req1 = (datetime.date.today() - datetime.timedelta(days=1)).strftime("%d/%m/%Y")
+    date_req1 = datetime.date.today().strftime("%d/%m/%Y")
+    url = f"https://www.cbr.ru/scripts/xml_metall.asp?date_req1={date_req1}&date_req2={date_req1}"
     response = requests.get(url)
 
     if response.status_code == 200:
@@ -39,6 +40,7 @@ def metals_logic() -> str:
 
         for metall in root.findall('Record'):
             code = metall.get('Code')
+            code = ['золота', 'серебра', 'платины', 'палладия'][int(code)-1]
             value = metall.find('Buy').text
             val_text += f'1 грамм {code} = {value} рублей\n'
 
@@ -46,6 +48,3 @@ def metals_logic() -> str:
 
     else:
         return f"Ошибка запроса: {response.status_code}"
-
-
-print(metals_logic())

@@ -14,7 +14,8 @@ def bot_help(message: Message):
         db.commit()
     text = [f'/{command} - {desk}' for command, desk in DEFAULT_COMMANDS]
     bot.send_message(message.from_user.id, 'Доступные команды:\n' + '\n'.join(text), reply_markup = gen_markup())
-    user.start_count += 1
+    user.help_count += 1
+    user.save()
     db.commit()
 
 

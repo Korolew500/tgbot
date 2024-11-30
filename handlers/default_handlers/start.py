@@ -24,6 +24,7 @@ def bot_start(message: Message):
                      reply_markup=gen_markup())
 
     user.start_count += 1
+    user.save()
     db.commit()
 
 

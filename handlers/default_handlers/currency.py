@@ -16,6 +16,7 @@ def bot_currency(message: Message):
         db.commit()
     bot.send_message(message.from_user.id, currency_logic(), reply_markup=gen_markup())
     user.currency_count += 1
+    user.save()
     db.commit()
 
 

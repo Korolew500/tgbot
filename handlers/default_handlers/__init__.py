@@ -1,1 +1,1 @@
-from . import help, start, metals, currency, inline
+from . import help, start, metals, currency, inline, history
