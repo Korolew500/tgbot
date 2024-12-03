@@ -1,2 +1,1 @@
-from . import help, start
-from . import echo  # Импортируется последним
+from . import help, start, metals, currency, inline, history
